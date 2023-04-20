@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="styles.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Pixels&display=swap" rel="stylesheet">
+
+  <title>Rock-Paper-Scissors</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1>ROSHAMBO</h1>
+    <h2 class="header">Choose your game!</h2> <!--This will change depending on view (innerText?)-->
+  </header>
+
+    <section class="score-columns">
+      <section id="user-score"> <!--persists across all views-->
+        <figure class="token" id="user-emoji" alt="person-emoji">👩‍🦱
+          <figcaption>Human</figcaption>
+        <p class="wins" id="user-wins">Wins: 0</p>
+        </figure>
+      </section>
+
+      <section class="main-game-section">
+        <div class="game-buttons"><!--choose your game view-->
+          <button type="button" class="button" id="classic-game-btn">CLASSIC 🪨📃✂️<!--ClassicGame--></button>
+          
+          <button type="button" class="button" id="difficult-game-btn">DIFFICULT<!--DifficultGame--></button>
+
+        </div>
+      </section>    
+
+      <section id="computer-score"> <!--persists across all views-->
+        <figure class="token" id= "computer-emoji" alt="computer-emoji">💻
+          <figcaption>Computer</figcaption>
+        <p class="wins" id="computer-wins">Wins: 0</p>
+        </figure>
+      </section>
+    </section>
+
+
+
+  <script src="main.js"></script>
+</body>
+</html>
