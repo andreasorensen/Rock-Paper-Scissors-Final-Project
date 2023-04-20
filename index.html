@@ -11,10 +11,12 @@
 </head>
 
 <body>
-  <header class="header">
+  <section class="header-and-description">
     <h1>ROSHAMBO</h1>
-    <h2 class="header">Choose your game!</h2> <!--This will change depending on view (innerText?)-->
-  </header>
+    <h2 class="header game-header">Choose your game!</h2>
+    <h2 class="header fighter-header hidden">Choose your fighter!</h2>
+    <h2 class="header game-result-header hidden"></h2>
+  </section>
 
     <section class="score-columns">
       <section id="user-score"> <!--persists across all views-->
@@ -26,9 +28,23 @@
 
       <section class="main-game-section">
         <div class="game-buttons"><!--choose your game view-->
-          <button type="button" class="button" id="classic-game-btn">CLASSIC 🪨📃✂️<!--ClassicGame--></button>
-          
-          <button type="button" class="button" id="difficult-game-btn">DIFFICULT<!--DifficultGame--></button>
+          <button type="submit" class="button" id="classic-game-btn">
+            <section>
+              <h3>STONE, WATER, BIRD</h3>
+              <p>🦩 bird beats water 💦</p>
+              <p>🗿 stone beats bird 🦩</p>
+              <p>💦 water beats stone 🗿</p>
+             <!-- add image here for button??  -->
+          </button>
+          <button type="submit" class="button" id="difficult-game-btn">
+            <section>
+              <h3>EARTH, AIR, FIRE, WATER</h3>
+              <p>💦 water beats earth 🌱 </p>
+              <p>🌱 earth beats fire 🔥</p>
+              <p>🔥 fire beats air 💨</p>
+              <p>💨 air beats water 💦</p>
+            </section>
+          </button>
 
         </div>
       </section>    

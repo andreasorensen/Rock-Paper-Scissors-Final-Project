@@ -8,7 +8,13 @@ html {
   background-color: #e73c7e;
 }
 
-.header {
+.hidden {
+  display: none;
+}
+
+/* Header */
+
+.header-and-description {
   text-align: center;
   width: 500px;
   position: absolute;
@@ -26,6 +32,8 @@ h1 {
 h2 {
   margin-top: 10px;
 }
+
+/* Score Columns */
 
 .score-columns {
   display: flex;
@@ -49,7 +57,7 @@ h2 {
 
 #computer-emoji, #user-emoji {
   font-size: larger;
-  height: 1000px;
+  height: 100vh;
   column-width: 200px;
   padding-top: 30px;
 }
@@ -66,19 +74,36 @@ h2 {
   height: 1000px;
 }
 
+/* buttons */
+
+h3 {
+  font-size: 17px;
+}
+
 .button {
   display: flex;
   justify-content: center;
   margin: auto;
-  height: 150px;
-  width: 200px;
-  padding-top: 20px;
+  width: 210px;
+  /* padding-top: 5px; */
+  padding-bottom: 5px;
+  font-size: 15px;
+  box-shadow: 9px 9px purple;
+  background-color: lightpink;
+  cursor: grab;
+}
+
+.button:hover {
+  background-color: blueviolet;
 }
 
 #classic-game-btn {
   margin-top: 200px;
+  height: 180px;
+  /* height: 220px; */
 }
 
 #difficult-game-btn {
   margin-top: 50px;
+  height: 235px;
 }
