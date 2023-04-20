@@ -1,0 +1,86 @@
+* {
+  font-family: 'Rubik Pixels', cursive;
+}
+
+html {
+	background-size: 200%;
+	height: 100vh;
+  background-color: #e73c7e;
+}
+
+.header {
+  text-align: center;
+  width: 500px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+h1 {
+  font-size: 50px;
+  margin-bottom: -10px;
+}
+
+h2 {
+  margin-top: 10px;
+}
+
+.score-columns {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  background-color: light orange;
+}
+
+#user-score {
+  margin-right: auto;
+}
+
+#computer-score {
+  margin-left: auto;
+}
+
+.wins {
+  margin-top: 15px;
+  font-size: smaller;
+}
+
+#computer-emoji, #user-emoji {
+  font-size: larger;
+  height: 1000px;
+  column-width: 200px;
+  padding-top: 30px;
+}
+
+#user-emoji {
+  column-width: 200px;
+  height: 1000px;
+  background-color: lightpink;
+}
+
+#computer-emoji {
+  background-color: lightpink;
+  column-width: 200px;
+  height: 1000px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  height: 150px;
+  width: 200px;
+  padding-top: 20px;
+}
+
+#classic-game-btn {
+  margin-top: 200px;
+}
+
+#difficult-game-btn {
+  margin-top: 50px;
+}
+
+
