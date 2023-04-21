@@ -8,10 +8,6 @@ html {
   background-color: #e73c7e;
 }
 
-.hidden {
-  display: none;
-}
-
 /* Header */
 
 .header-and-description {
@@ -123,3 +119,6 @@ h3 {
   padding-top: 200px;
 }
 
+.hidden {
+  display: none;
+}
