@@ -5,21 +5,20 @@ var difficultGameChoices = ['earth', 'air', 'fire', 'water'];
 var players = [];
 var computerPlayer;
 var userPlayer;
+var computerChoice;
 // var gameType = game.gameType
 var game = createGame()  //create function that changes "gameType" to "currentSelection" based on what button the user chooses.(beginGame)
 
 var userChoice; //Do i need this variable?
-var computerChoice; // do I need this variable?
-
 
 // Game Functions
 
-
-function createPlayer(name, token, wins){
+function createPlayer(name, token){
   var player = {
     name: name, 
     token: token,
     wins: 0
+    // add fighter here?? replace in the function that the choice is chosen in? 
   }
   return player
 }
@@ -33,13 +32,19 @@ function createGame(){
     gameType: "difficult" // this will be updated with another function that changes it depending on which game the user chooses
   }
   players = game.players
-  assignComputerChoice();
+  // determineComputerChoice();
   return game
 }
 
+function takeTurn(computerChoice, userChoice) {
+  determineComputerChoice();
+  determineUserChoice();
 
 
-function assignComputerChoice(){
+}
+
+
+function determineComputerChoice(){
   if (game.gameType === 'classic'){ 
     var i = Math.floor(Math.random() * classicGameChoices.length)
     computerChoice = classicGameChoices[i]
@@ -50,8 +55,11 @@ function assignComputerChoice(){
   return computerChoice
 }
 
+// function determineUserChoice();
+function checkWins();
 
-
+function detectDraw();
+function beingNewGame();  // includes timeout()
 
 
 
@@ -65,7 +73,6 @@ function assignComputerChoice(){
 // function updateWins(){}; // update the newGame.score[i], based on winner
 
 // function handlePlayersChoice(){};
-// function determineComputerChoice(){};
 // function displayGameResult(){};
 
 
