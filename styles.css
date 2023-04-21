@@ -42,16 +42,16 @@ h2 {
   background-color: light orange;
 }
 
-#user-score {
+#user-score-column {
   margin-right: auto;
 }
 
-#computer-score {
+#computer-score-column {
   margin-left: auto;
 }
 
 .wins {
-  margin-top: 15px;
+  margin-top: 30px;
   font-size: smaller;
 }
 
@@ -59,7 +59,7 @@ h2 {
   font-size: larger;
   height: 100vh;
   column-width: 200px;
-  padding-top: 30px;
+  padding-top: 80px;
 }
 
 #user-emoji {
@@ -76,16 +76,11 @@ h2 {
 
 /* buttons */
 
-h3 {
-  font-size: 17px;
-}
-
 .button {
   display: flex;
   justify-content: center;
   margin: auto;
   width: 210px;
-  /* padding-top: 5px; */
   padding-bottom: 5px;
   font-size: 15px;
   box-shadow: 9px 9px purple;
@@ -107,3 +102,24 @@ h3 {
   margin-top: 50px;
   height: 235px;
 }
+
+h3 {
+  font-size: 17px;
+}
+
+#change-game-btn {
+  margin-top: 80px;
+  height: 30px;
+  background-color: #e73c7e ;
+  cursor: grab;
+  box-shadow: 5px 5px purple;
+}
+
+.fighter {
+  height: 200px;
+}
+
+#water-btn, #bird-btn {
+  padding-top: 200px;
+}
+
