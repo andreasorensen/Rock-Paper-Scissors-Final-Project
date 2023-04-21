@@ -8,7 +8,9 @@ html {
   background-color: #e73c7e;
 }
 
-.header {
+/* Header */
+
+.header-and-description {
   text-align: center;
   width: 500px;
   position: absolute;
@@ -27,6 +29,8 @@ h2 {
   margin-top: 10px;
 }
 
+/* Score Columns */
+
 .score-columns {
   display: flex;
   text-align: center;
@@ -34,24 +38,24 @@ h2 {
   background-color: light orange;
 }
 
-#user-score {
+#user-score-column {
   margin-right: auto;
 }
 
-#computer-score {
+#computer-score-column {
   margin-left: auto;
 }
 
 .wins {
-  margin-top: 15px;
+  margin-top: 30px;
   font-size: smaller;
 }
 
 #computer-emoji, #user-emoji {
   font-size: larger;
-  height: 1000px;
+  height: 100vh;
   column-width: 200px;
-  padding-top: 30px;
+  padding-top: 80px;
 }
 
 #user-emoji {
@@ -66,21 +70,55 @@ h2 {
   height: 1000px;
 }
 
+/* buttons */
+
 .button {
   display: flex;
   justify-content: center;
   margin: auto;
-  height: 150px;
-  width: 200px;
-  padding-top: 20px;
+  width: 210px;
+  padding-bottom: 5px;
+  font-size: 15px;
+  box-shadow: 9px 9px purple;
+  background-color: lightpink;
+  cursor: grab;
+}
+
+.button:hover {
+  background-color: blueviolet;
 }
 
 #classic-game-btn {
   margin-top: 200px;
+  height: 180px;
+  /* height: 220px; */
 }
 
 #difficult-game-btn {
   margin-top: 50px;
+  height: 235px;
 }
 
+h3 {
+  font-size: 17px;
+}
 
+#change-game-btn {
+  margin-top: 80px;
+  height: 30px;
+  background-color: #e73c7e ;
+  cursor: grab;
+  box-shadow: 5px 5px purple;
+}
+
+.fighter {
+  height: 200px;
+}
+
+#water-btn, #bird-btn {
+  padding-top: 200px;
+}
+
+.hidden {
+  display: none;
+}

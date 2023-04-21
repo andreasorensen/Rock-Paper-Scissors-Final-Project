@@ -11,29 +11,66 @@
 </head>
 
 <body>
-  <header class="header">
+  <section class="header-and-description">
     <h1>ROSHAMBO</h1>
-    <h2 class="header">Choose your game!</h2> <!--This will change depending on view (innerText?)-->
-  </header>
+    <h2 class="header" id="game-choice-header">Choose your game!</h2>
+    <h2 class="header hidden" id="fighter-choice-header ">Choose your fighter!</h2>
+    <h2 class="header hidden" id="game-result-header "><!--This will be interpolated based on wether the user/computer wins or if it's a tie--></h2>
+  </section>
 
     <section class="score-columns">
-      <section id="user-score"> <!--persists across all views-->
+      <section id="user-score-column"> <!--persists across all views-->
         <figure class="token" id="user-emoji" alt="person-emoji">👩‍🦱
           <figcaption>Human</figcaption>
         <p class="wins" id="user-wins">Wins: 0</p>
+        <button type="submit" id="change-game-btn" class="hidden">Change Game?</button>
         </figure>
       </section>
 
       <section class="main-game-section">
         <div class="game-buttons"><!--choose your game view-->
-          <button type="button" class="button" id="classic-game-btn">CLASSIC 🪨📃✂️<!--ClassicGame--></button>
-          
-          <button type="button" class="button" id="difficult-game-btn">DIFFICULT<!--DifficultGame--></button>
-
+          <button type="submit" class="button" id="classic-game-btn">
+            <section>
+              <h3>STONE, WATER, BIRD</h3>
+              <p>🦩 bird beats water 💦</p>
+              <p>🗿 stone beats bird 🦩</p>
+              <p>💦 water beats stone 🗿</p>
+             <!-- add image here for button??  -->
+          </button>
+          <button type="submit" class="button" id="difficult-game-btn">
+            <section>
+              <h3>EARTH, AIR, FIRE, WATER</h3>
+              <p>💦 water beats fire 🔥 </p>
+              <p>🌱 earth beats air 💨</p>
+              <p>🔥 fire beats earth 🌱</p>
+              <p>💨 air beats water 💦</p>
+            </section>
+          </button>
         </div>
+
+        <section class="classic-fighters-view hidden">
+          <input class="fighter" type="image" id="bird-btn" src="assests/pinkbird.png" alt="bird-button">
+
+          <input class="fighter" type="image" id="water-btn" src="assests/water2.png" alt="water-button">
+
+          <input class="fighter" type="image" id="stone-btn" src="assests/rock.png" alt="stone-button">
+        </section>
+
+        <section class="difficult-game-view hidden">
+          <input class="fighter" type="image" id="earth-btn" src="assests/earth.png" alt="earth-button">
+
+          <input class="fighter" type="image" id="water-btn2" src="assests/water.png" alt="water-button">
+
+          <input class="fighter" type="image" id="fire-btn" src="assests/fire.png" alt="fire-button">
+
+          <input class="fighter" type="image" id="air-btn" src="assests/wind.png" alt="air-button">
+
+        </section>
+
+
       </section>    
 
-      <section id="computer-score"> <!--persists across all views-->
+      <section id="computer-score-column"> <!--persists across all views-->
         <figure class="token" id= "computer-emoji" alt="computer-emoji">💻
           <figcaption>Computer</figcaption>
         <p class="wins" id="computer-wins">Wins: 0</p>
