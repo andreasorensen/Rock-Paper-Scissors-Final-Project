@@ -15,11 +15,11 @@ var computerChoice; // do I need this variable?
 // Game Functions
 
 
-function createPlayer(name, token, wins=0){
+function createPlayer(name, token, wins){
   var player = {
     name: name, 
     token: token,
-    wins
+    wins: 0
   }
   return player
 }
@@ -30,11 +30,27 @@ function createGame(){
   game = {
     players: [userPlayer, computerPlayer],
     score: `user: ${userPlayer.wins}, computer: ${computerPlayer.wins}`,
-    // gameType // way to track game type -- function that determines which event.target is pushed, then update game.gameType
+    gameType: "difficult" // this will be updated with another function that changes it depending on which game the user chooses
   }
   players = game.players
+  assignComputerChoice();
   return game
 }
+
+
+
+function assignComputerChoice(){
+  if (game.gameType === 'classic'){ 
+    var i = Math.floor(Math.random() * classicGameChoices.length)
+    computerChoice = classicGameChoices[i]
+  } else {
+    var i = Math.floor(Math.random() * difficultGameChoices.length);
+    computerChoice = difficultGameChoices[i]
+  }
+  return computerChoice
+}
+
+
 
 
 
