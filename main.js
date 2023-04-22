@@ -95,28 +95,24 @@ function determineClassicWin() {
 
 function determineDifficultWin() {
   if ((userChoice === "water" && computerChoice === "fire") || (userChoice === "earth" && computerChoice === "air") || (userChoice === "fire" && computerChoice === "earth") || (userChoice === "air" && computerChoice === "water")) {
-    winner = "user"
     console.log("You win!")
-    console.log(winner)
+    winner = "user"
   } else {
-    winner = "computer"
     console.log('You lose!')
-    console.log(winner)
+    winner = "computer"
   }
   checkWins();
 }
 
 function checkWins(){
-  if (winner = "user") {
+  if (winner === "user") {
     userPlayer.wins = userPlayer.wins + 1
-    console.log(userPlayer.wins)
+    console.log('userPlayer.wins:', userPlayer.wins)
     takeTurn();
-    return userPlayer
   } else {
     computerPlayer.wins = computerPlayer.wins + 1
-    console.log(computerPlayer.wins)
+    console.log('computerPlayer.wins:', computerPlayer.wins)
     takeTurn();
-    return computerPlayer
   }
 }
 
