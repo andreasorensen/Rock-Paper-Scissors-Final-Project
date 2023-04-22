@@ -8,16 +8,16 @@ var userPlayer;
 var computerChoice;
 // var gameType = game.gameType
 var game = createGame()  //create function that changes "gameType" to "currentSelection" based on what button the user chooses.(beginGame)
-
-var userChoice; //Do i need this variable?
+var userChoice;
+var winner;
 
 // Game Functions
 
-function createPlayer(name, token){
+function createPlayer(name, token, wins=0){
   var player = {
     name: name, 
     token: token,
-    wins: 0
+    wins
     // add fighter here?? replace in the function that the choice is chosen in? 
   }
   return player
@@ -84,27 +84,45 @@ function determineWinner(){
 
 function determineClassicWin() {
   if ((userChoice === "bird" && computerChoice === "water") || (userChoice === "stone" && computerChoice === "bird") || (userChoice === "water" && computerChoice === "stone")) {
+    winner = "user"
     console.log("You win!")
   } else {
+    winner = "computer"
     console.log('You lose!')
   }
-  // checkWins();  This function will check/update player.wins based on the result of the game
+  checkWins();
 }
 
 function determineDifficultWin() {
   if ((userChoice === "water" && computerChoice === "fire") || (userChoice === "earth" && computerChoice === "air") || (userChoice === "fire" && computerChoice === "earth") || (userChoice === "air" && computerChoice === "water")) {
+    winner = "user"
     console.log("You win!")
+    console.log(winner)
   } else {
+    winner = "computer"
     console.log('You lose!')
+    console.log(winner)
   }
-  //checkWins();
+  checkWins();
+}
+
+function checkWins(){
+  if (winner = "user") {
+    userPlayer.wins = userPlayer.wins + 1
+    console.log(userPlayer.wins)
+    takeTurn();
+    return userPlayer
+  } else {
+    computerPlayer.wins = computerPlayer.wins + 1
+    console.log(computerPlayer.wins)
+    takeTurn();
+    return computerPlayer
+  }
 }
 
 
 
 
-
-// function checkWins();
 // function beingNewGame();  // includes timeout()
 //displayGameResult(){};
 
