@@ -32,17 +32,27 @@ function createGame(){
     gameType: "difficult" // this will be updated with another function that changes it depending on which game the user chooses
   }
   players = game.players
-  // determineComputerChoice();
+  takeTurn();
   return game
 }
 
-function takeTurn(computerChoice, userChoice) {
+function takeTurn() {
   determineComputerChoice();
   determineUserChoice();
-
-
+  detectDraw();
 }
 
+function determineUserChoice(){
+  if (game.gameType === 'classic'){ 
+    var i = Math.floor(Math.random() * classicGameChoices.length)
+    userChoice = classicGameChoices[i]
+  } else {
+    var i = Math.floor(Math.random() * difficultGameChoices.length);
+    userChoice = difficultGameChoices[i]
+  }
+  console.log(userChoice)
+  return userChoice
+}
 
 function determineComputerChoice(){
   if (game.gameType === 'classic'){ 
@@ -52,35 +62,59 @@ function determineComputerChoice(){
     var i = Math.floor(Math.random() * difficultGameChoices.length);
     computerChoice = difficultGameChoices[i]
   }
+  console.log(computerChoice)
   return computerChoice
 }
 
-// function determineUserChoice();
-function checkWins();
+function detectDraw(){
+  if (computerChoice === userChoice){
+    console.log(`It's a draw! You both chose ${userChoice}!`)
+  } else {
+    determineWinner();
+  }
+}
 
-function detectDraw();
-function beingNewGame();  // includes timeout()
+function determineWinner(){
+  if (game.gameType === 'classic'){
+    determineClassicWin();
+  } else {
+    determineDifficultWin();
+  }
+}
+
+function determineClassicWin() {
+  if ((userChoice === "bird" && computerChoice === "water") || (userChoice === "stone" && computerChoice === "bird") || (userChoice === "water" && computerChoice === "stone")) {
+    console.log("You win!")
+  } else {
+    console.log('You lose!')
+  }
+  // checkWins();  This function will check/update player.wins based on the result of the game
+}
+
+function determineDifficultWin() {
+  if ((userChoice === "water" && computerChoice === "fire") || (userChoice === "earth" && computerChoice === "air") || (userChoice === "fire" && computerChoice === "earth") || (userChoice === "air" && computerChoice === "water")) {
+    console.log("You win!")
+  } else {
+    console.log('You lose!')
+  }
+  //checkWins();
+}
 
 
 
 
-// function beginGame(){
-//   computerChoice = 
-// }
+
+// function checkWins();
+// function beingNewGame();  // includes timeout()
+//displayGameResult(){};
+
+
 
 
 // function checkWins(){}; // check game board for current wins -- use this function to updateWins() ?? Or are these two the same thing? 
 // function updateWins(){}; // update the newGame.score[i], based on winner
 
 // function handlePlayersChoice(){};
-// function displayGameResult(){};
-
-
-// GAME ONLY PSEUDOCODE: 
-
-// determine 
-
-
 
 
 
@@ -106,10 +140,6 @@ function beingNewGame();  // includes timeout()
        // also need to run all beginning createPlayer, createGame, etc. for the above functions
 
 
-// 2. CLASSIC VIEW: 
-
-    // playClassicGame(){}
-      // need to be able to choose from the 3 options, then hide the rest, while at the same time displaying userChoice & computerChoice
 
 // 3. DIFFICULT VIEW -- basically the same as above but with 4 options 
     // is there a way I can use the same functions to determine the computer chocie as well as determine the winner?
