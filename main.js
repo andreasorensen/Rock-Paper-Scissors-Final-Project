@@ -13,7 +13,6 @@ var classicGameChoices = [
   defeats: 'water'}
 ];
 
-
 var difficultGameChoices = [
   
   {name: 'earth',
@@ -37,9 +36,7 @@ var difficultGameChoices = [
 var players = [];
 var computerPlayer;
 var userPlayer;
-var computerChoice;
-// var gameType = game.gameType
-var game;  //create function that changes "gameType" to "currentSelection" based on what button the user chooses.(beginGame)
+var game;
 
  // //Query Selector Variables: 
 
@@ -47,10 +44,9 @@ var gameChoicePrompt = document.querySelector('#game-choice-header');
 var fighterChoiceHeader = document.querySelector('#fighter-choice-header');
 
 // // These 👇 will be used to interpolate game results as well as change the number of wins:
-// var gameResultBanner = document.getElementById('game-result-header')
+
 var userWins = document.querySelector('#user-wins');
 var computerWins = document.querySelector('#computer-wins')
-
 
 var changeGameBtn = document.querySelector('#change-game-btn');
 
@@ -143,14 +139,19 @@ function determineWinner(){
   } else {
     winner = computerPlayer
   } 
+  console.log(winner)
   updateWins(winner)
 }
 
   // how can i get the wins to persist when I move back to the home page? What function is resetting it in my logic-- the createGame? when/where is this called? -- how can I change it?
 
 function updateWins(winner){
-   winner.wins = winner.wins + 1
-   console.log(winner)
+  winner.wins = winner.wins + 1
+  if (winner === userPlayer){
+    userWins.innerText = `Wins: ${userPlayer.wins}`
+  } else {
+    computerWins.innerText = `Wins: ${computerPlayer.wins}`
+  }
 }
 
 function timeout(){
@@ -163,16 +164,6 @@ function showFighterChoices(){
   
 }
 
-    ///////////////////////dom updates////////////////////////////////
-
-// Event Listeners:
-
-
-// gameButtons.addEventListener('click', function (event){
-//   showGame(event)
-//   updateGameType(event)
-// })
-  
 // Need to refactor to show event delegation with event.target but works for now 👇👇👇 maybe use event.target.parentElement === ???
 
 difficultGameBtn.addEventListener('click', function(event){
