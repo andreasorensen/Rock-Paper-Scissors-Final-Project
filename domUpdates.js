@@ -35,21 +35,46 @@ var airFighter = document.querySelector('#air-btn');
 // Event Listeners:
 
 gameButtons.addEventListener('click', function(event){
+  showGame();
+  // create/add function that hides all similar elements, then add functions to display what's needed after each if statement?
   if(event.target === classicGameBtn){
-    showClassicGame()
+    // should i use showClassicGame() OR just invoke function
+    // show(classicGameView)
   } else {
-    showDifficultGame()
+    // should i use showDifficultGame() OR just invoke function:
+    // show(classicGameView)
   };
 })
 
 
-function showClassicGame(){
+function showGame(event){
+  hide(gameButtons)
+  show(fighterChoicePrompt)
+  show(changeGameBtn)
+  if(event.target === classicGameBtn){
+    show(classicGameView)
+  } else {
+    show(difficultGameView)
+  }
+  createGame()
+}
 
-};
 
-function showDifficultGame(){
+function updateGameType(event){
+  if (event.target === classicGameBtn){
+    game.gameType = 'classic'
+  } else {
+    game.gameType = 'difficult'
+  }
+  return game
+}
+// function showClassicGame(){
 
-};
+// };
+
+// function showDifficultGame(){
+
+// };
 
 function beginGame(event){
   //   if (event.target === classicGameBtn){

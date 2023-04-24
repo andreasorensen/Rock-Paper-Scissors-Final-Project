@@ -88,13 +88,13 @@ h2 {
   background-color: blueviolet;
 }
 
-#classic-game-btn {
+#classic-btn {
   margin-top: 200px;
   height: 180px;
   /* height: 220px; */
 }
 
-#difficult-game-btn {
+#difficult-btn {
   margin-top: 50px;
   height: 235px;
 }
@@ -115,7 +115,7 @@ h3 {
   height: 200px;
 }
 
-#water-btn, #bird-btn {
+#water-btn, #bird-btn, .difficult-game-view {
   padding-top: 200px;
 }
 

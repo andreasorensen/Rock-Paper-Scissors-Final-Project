@@ -14,8 +14,7 @@
   <section class="header-and-description">
     <h1>ROSHAMBO</h1>
     <h2 class="header" id="game-choice-header">Choose your game!</h2>
-    <h2 class="header hidden" id="fighter-choice-header ">Choose your fighter!</h2>
-    <h2 class="header hidden" id="game-result-header "><!--This will be interpolated based on wether the user/computer wins or if it's a tie--></h2>
+    <h2 class="header hidden" id="fighter-choice-header">Choose your fighter!</h2>
   </section>
 
     <section class="score-columns">
@@ -27,18 +26,18 @@
         </figure>
       </section>
 
-      <section class="main-game-section">
+      <main class="main-game-section">
         <div class="game-buttons"><!--choose your game view-->
-          <button type="submit" class="button" id="classic-game-btn">
-            <section>
-              <h3>STONE, WATER, BIRD</h3>
-              <p>🦩 bird beats water 💦</p>
-              <p>🗿 stone beats bird 🦩</p>
-              <p>💦 water beats stone 🗿</p>
+          <button type="submit" class="classic-btn button" id="classic-btn">
+            <section class='classic-btn'>
+              <h3 class='classic-btn'>STONE, WATER, BIRD</h3>
+              <p class='classic-btn'>🦩 bird beats water 💦</p>
+              <p class='classic-btn'>🗿 stone beats bird 🦩</p>
+              <p class='classic-btn'>💦 water beats stone 🗿</p>
              <!-- add image here for button??  -->
           </button>
-          <button type="submit" class="button" id="difficult-game-btn">
-            <section>
+          <button type="submit" class="button" id="difficult-btn">
+            <section id="difficult-game-btn">
               <h3>EARTH, AIR, FIRE, WATER</h3>
               <p>💦 water beats fire 🔥 </p>
               <p>🌱 earth beats air 💨</p>
@@ -64,11 +63,12 @@
           <input class="fighter" type="image" id="fire-btn" src="assests/fire.png" alt="fire-button">
 
           <input class="fighter" type="image" id="air-btn" src="assests/wind.png" alt="air-button">
-
         </section>
 
+        <section class="results-display">
 
-      </section>    
+        </section>
+      </main>    
 
       <section id="computer-score-column"> <!--persists across all views-->
         <figure class="token" id= "computer-emoji" alt="computer-emoji">💻
