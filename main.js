@@ -1,5 +1,37 @@
-var classicGameChoices = ['stone', 'water', 'bird'];
-var difficultGameChoices = ['earth', 'air', 'fire', 'water'];
+var classicGameChoices = [
+
+  {name: 'stone', 
+  image: '<img class="fighter" type="image" id="stone-btn" src="assests/rock.png" alt="stone-button">', 
+  defeats: 'bird'}, 
+  
+  {name: 'water', 
+  image: '<img class="fighter" type="image" id="water-btn" src="assests/water2.png" alt="water-button">', 
+  defeats: 'stone'}, 
+
+  {name: 'bird', 
+  image: '<img class="fighter" type="image" id="bird-btn" src="assests/pinkbird.png" alt="bird-button">', 
+  defeats: 'water'}
+];
+
+
+var difficultGameChoices = [
+  
+  {name: 'earth',
+  image: '<img class="fighter" type="image" id="earth-btn" src="assests/earth.png" alt="earth-button">',
+  defeats: 'air'},
+  
+  {name: 'air',
+  image: '<img class="fighter" type="image" id="air-btn" src="assests/wind.png" alt="air-button">',
+  defeats: 'water'},
+  
+  {name: 'fire',
+  image: '<img class="fighter" type="image" id="fire-btn" src="assests/fire.png" alt="fire-button">',
+  defeats: 'earth'},
+
+  {name: 'water',
+  image: '<img class="fighter" type="image" id="water-btn2" src="assests/water.png" alt="water-button">',
+  defeats: 'fire'}
+];
 
 // // data model variables:
 var players = [];
@@ -8,7 +40,6 @@ var userPlayer;
 var computerChoice;
 // var gameType = game.gameType
 var game;  //create function that changes "gameType" to "currentSelection" based on what button the user chooses.(beginGame)
-var userChoice;
 
  // //Query Selector Variables: 
 
@@ -98,12 +129,28 @@ function determineComputerChoice(){
 function detectDraw(){
   if (computerPlayer.fighter === userPlayer.fighter){
     fighterChoiceHeader.innerText = "It's a draw!"
-    console.log(computerPlayer, userPlayer)
     timeout()
-    takeTurn()
+    takeTurn() // I don't think I will need this here
   } else {
-    // determineWinner();
+    determineWinner();
   }
+}
+
+function determineWinner(){
+  var winner;
+  if (userPlayer.fighter.defeats === computerPlayer.fighter.name){
+    winner = userPlayer
+  } else {
+    winner = computerPlayer
+  } 
+  updateWins(winner)
+}
+
+  // how can i get the wins to persist when I move back to the home page? What function is resetting it in my logic-- the createGame? when/where is this called? -- how can I change it?
+
+function updateWins(winner){
+   winner.wins = winner.wins + 1
+   console.log(winner)
 }
 
 function timeout(){
@@ -115,48 +162,6 @@ function timeout(){
 function showFighterChoices(){
   
 }
-
-// function determineWinner(){
-//   if (game.gameType === 'classic'){
-//     determineClassicWin();
-//   } else {
-//     determineDifficultWin();
-//   }
-// }
-
-// function determineClassicWin() {
-//   if ((userChoice === "bird" && computerChoice === "water") || (userChoice === "stone" && computerChoice === "bird") || (userChoice === "water" && computerChoice === "stone")) {
-//     var winner = "user"
-//     console.log("You win!")
-//   } else {
-//     winner = "computer"
-//     console.log('You lose!')
-//   }
-//   checkWins(winner);
-// }
-
-// function determineDifficultWin() {
-//   if ((userChoice === "water" && computerChoice === "fire") || (userChoice === "earth" && computerChoice === "air") || (userChoice === "fire" && computerChoice === "earth") || (userChoice === "air" && computerChoice === "water")) {
-//     console.log("You win!")
-//     var winner = "user"
-//   } else {
-//     console.log('You lose!')
-//     winner = "computer"
-//   }
-//   checkWins(winner);
-// }
-
-// function checkWins(winner){
-//   if (winner === "user") {
-//     userPlayer.wins = userPlayer.wins + 1
-//     console.log('userPlayer.wins:', userPlayer.wins)
-//     takeTurn();
-//   } else {
-//     computerPlayer.wins = computerPlayer.wins + 1
-//     console.log('computerPlayer.wins:', computerPlayer.wins)
-//     takeTurn();
-//   }
-// }
 
     ///////////////////////dom updates////////////////////////////////
 
@@ -229,40 +234,19 @@ function updateGameType(event){
   
   // why is my event.target not working?
 
-
-
-
 // function beginNewGame(event){
 
 // add another button to reset game scores 
   
 //   } // also need timeout() included here.
 
-// function beginNewGame();  // includes timeout()
+// function beginNewGame(); 
 //displayGameResult(){};
 // function handlePlayersChoice(){};
 
 
 // TO REFACTOR: go thgouh & see if I can pass any of the variables as parameters
 
-// 1. write function that changes the view depending on which button they push - classic or difficult
-    // write conditional -- if event.target === classic, call another function that hides/shows everything not included/included on the classic view page
-    // if !event.target === classic, call the another function that hides/shows everything not incldued/included on the difficult view page
-
-      // function to hide/show on classic view
-
-        // what to hide:   game buttons & choose your game header
-        // what to show: classic game buttons, change game button, & choose your fighter header
-
-      // function to hide/show on difficult view
-
-          // what to hide: choose game buttons & choose your game header
-          // what to show: difficult game buttons, change game button & choose your fighter header.
-
-       // also need to run all beginning createPlayer, createGame, etc. for the above functions
 
 
-
-// 3. DIFFICULT VIEW -- basically the same as above but with 4 options 
-    // is there a way I can use the same functions to determine the computer chocie as well as determine the winner?
 
