@@ -115,7 +115,7 @@ h3 {
   height: 200px;
 }
 
-#water-btn, #bird-btn {
+#water-btn, #bird-btn, .difficult-game-view {
   padding-top: 200px;
 }
 
