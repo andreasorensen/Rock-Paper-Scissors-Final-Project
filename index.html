@@ -10,16 +10,19 @@
   </head>
 
   <body>
-    <section class="header-and-description">
+    <header class="header">
       <h1>ROSHAMBO</h1>
-      <h2 class="header" id="game-choice-header">Choose your game!</h2>
-      <h2 class="header hidden" id="fighter-choice-header">Choose your fighter!</h2>
+    </header>
+    <section class="header">
+      <h2 id="game-choice-header">Choose your game!</h2>
+      <h2 class="hidden" id="fighter-choice-header">Choose your fighter!</h2>
     </section>
 
     <main class="score-columns">
-        <!-- figure out how to not have the main nested with in this & change the CSS! -->
+        <!-- How to change this class name-->
       <section class="score-columns" id="user-score-column"> <!--persists across all views-->
-        <figure class="token" id="user-emoji" alt="person-emoji">👩‍🦱
+        <figure class="token"
+        alt="person-emoji">👩‍🦱
           <figcaption>Human</figcaption>
           <p class="wins" id="user-wins">Wins:</p>
           <p class="wins" id="num-user-wins">0</p>
@@ -71,7 +74,7 @@
       </section>    
 
       <section class= "score-columns" id="computer-score-column"> <!--persists across all views-->
-        <figure class="token" id= "computer-emoji" alt="computer-emoji">💻
+        <figure class="token" alt="computer-emoji">💻
           <figcaption>Computer</figcaption>
           <p class="wins">Wins:</p>
           <p class="wins" id="num-computer-wins">0</p>

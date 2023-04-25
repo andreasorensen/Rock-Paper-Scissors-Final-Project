@@ -40,6 +40,11 @@ var game;
 
 var gameChoicePrompt = document.querySelector('#game-choice-header');
 var fighterChoiceHeader = document.querySelector('#fighter-choice-header');
+
+// keep fighterChoiceHeader - change name to gamePrompt
+// change innerText of newGamePrompt anytime gameChoicePrompt is being shown/hidden
+// replace fighterChoiceHeader with gameChoicePrompt
+
 var userWins = document.querySelector('#num-user-wins');
 var computerWins = document.querySelector('#num-computer-wins')
 var changeGameBtn = document.querySelector('#change-game-btn');
@@ -73,7 +78,7 @@ var airFighter = document.querySelector('#air');
 
 // Need to refactor to show event delegation with event.target but works for now 👇👇👇 maybe use event.target.parentElement === ???
 
-resetScoreBtn.addEventListener('click', resetScore)
+resetScoreBtn.addEventListener('click', resetPlayerWins)
 
 difficultGameBtn.addEventListener('click', function(event){
   showGame(event)
@@ -155,7 +160,7 @@ function determineComputerChoice(){
   detectDraw()
 }
 
-function showBattle(winner){
+function showBattle(){
   hide(classicGameView)
   hide(difficultGameView)
   fighterDisplay.innerHTML = `${userPlayer.fighter.image} ${computerPlayer.fighter.image}`
@@ -194,6 +199,8 @@ function updateWins(winner){
   showResetScoreBtn()
 }
 
+
+
 function timeout(){
   setTimeout(() => {
     fighterChoiceHeader.innerText = "Choose your fighter!", fighterDisplay.innerHTML = "", resetBoard()
@@ -211,8 +218,8 @@ function resetBoard(){
 
 function showGame(){
   hide(gameButtons)
-  hide(gameChoicePrompt)
-  show(fighterChoiceHeader)
+  hide(gameChoicePrompt) /// can get rid of this HTML change ... instead have anohter function to update Banner
+  show(fighterChoiceHeader) /// can get rid of this HTML change ...
   show(changeGameBtn)
   createGame()
 }
@@ -240,10 +247,22 @@ function showResetScoreBtn(){
   }
 }
 
-function resetScore() {
+function resetPlayerWins() {
   userPlayer.wins = 0
-  userWins.innerText = `${userPlayer.wins}`
   computerPlayer.wins = 0
+  resetScoreBoard()
+}
+
+function resetScoreBoard(){
+  userWins.innerText = `${userPlayer.wins}`
   computerWins.innerText = `${computerPlayer.wins}`
   hide(resetScoreBtn)
 }
+
+// function changeBanner(event){
+  // if (event.target.id === gamebuttons/or two variables to hit both){
+  //   promptHeader.innerHTML = "Choose your fighter!"
+  // } else if (winner)
+// }
+
+//if i could pass element as parameter?
