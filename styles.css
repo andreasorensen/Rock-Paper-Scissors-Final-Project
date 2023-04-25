@@ -108,7 +108,7 @@ h3 {
   font-size: 17px;
 }
 
-#change-game-btn {
+#change-game-btn, #reset-score-btn {
   margin-top: 80px;
   height: 30px;
   background-color: #e73c7e ;
