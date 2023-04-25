@@ -50,6 +50,7 @@ var gameButtons = document.querySelector('.game-buttons')
 var classicGameBtn = document.querySelector('.classic-btn');
 var difficultGameBtn = document.querySelector('#difficult-game-btn'); // do i need this if event handler is on gameButtons section?
 var fighterDisplay = document.querySelector('.fighter-display');
+var resetScoreBtn = document.querySelector('#reset-score-btn')
 
 /// REFACTOR THE BELOW TO DRY!! 👇👇👇 ////
 
@@ -71,6 +72,8 @@ var airFighter = document.querySelector('#air');
 //// EVENT LISTENERS /////
 
 // Need to refactor to show event delegation with event.target but works for now 👇👇👇 maybe use event.target.parentElement === ???
+
+resetScoreBtn.addEventListener('click', resetScore)
 
 difficultGameBtn.addEventListener('click', function(event){
   showGame(event)
@@ -120,7 +123,6 @@ function createGame(){
   userPlayer = createPlayer("human", " 👩‍🦱 ", userWins.innerText);
   game = {
     players: [userPlayer, computerPlayer],
-    score: `user: ${userPlayer.wins}, computer: ${computerPlayer.wins}`, // I think this can be taken out.
   }
   players = game.players
   return game
@@ -159,24 +161,8 @@ function showBattle(winner){
   hide(classicGameView)
   hide(difficultGameView)
   fighterDisplay.innerHTML = `${userPlayer.fighter.image} ${computerPlayer.fighter.image}`
-  // if (winner = userPlayer){
-  //   fighterDisplay.innerText = 'You win!'
   timeout();
 }
-
-// change the innerText of fighterHeader to: either: 'You Won!' || 'Computer Won!'  w/timeout ????
-  // also need to invoke timeout() so that game board resets
-//hide(fighterHeader ??)
-//hide(difficultGameView) 
-//hide(classicGameView)
-// change innerHTML of results-display to have img of both userPlayer.fighter.image & computerPlayer.fighter.image
-
-// function resetBoard()
-// this function will reset the gameBoard after each round
-
-// function beginNewGame()
-//this function will have an event listener on the begin new game button
-
 
 function detectDraw(){
   if (computerPlayer.fighter === userPlayer.fighter){
@@ -207,12 +193,23 @@ function updateWins(winner){
   } else {
     computerWins.innerText = `${computerPlayer.wins}`
   }
+  showResetScoreBtn()
 }
 
 function timeout(){
   setTimeout(() => {
-    fighterChoiceHeader.innerText = "Choose your fighter!", fighterDisplay.innerHTML = ""
+    fighterChoiceHeader.innerText = "Choose your fighter!", fighterDisplay.innerHTML = "", resetBoard()
   }, 2000)
+}
+
+function resetBoard(){
+  console.log(difficultGameView)
+  if (game.gameType === 'classic'){
+    show(classicGameView)
+  } 
+  else if (game.gameType === 'difficult'){
+    show(difficultGameView)
+  }
 }
 
 function showGame(){
@@ -239,22 +236,17 @@ function updateGameType(event){
   }
   return game
 }
-  
 
+function showResetScoreBtn(){
+  if(userPlayer.wins > 0 || computerPlayer.wins > 0){
+    show(resetScoreBtn)
+  }
+}
 
-
-  // why is my event.target not working?
-
-// TO REFACTOR: go thgouh & see if I can pass any of the variables as parameters
-
-// add reset game button & function
-  // reset wins to zero
-  // only display if score is > 0
-      // if (userPlayer.wins || computerPlayer.wins > 0)
-        // show(resetGameButton)
-  // ok to have on main page as well
-
-  // make userChoice buttons function
-
-  // display the computerChoice image & the userChioce image
-  // resetBoard? with timeout after each roundb
+function resetScore() {
+  userPlayer.wins = 0
+  userWins.innerText = `${userPlayer.wins}`
+  computerPlayer.wins = 0
+  computerWins.innerText = `${computerPlayer.wins}`
+  hide(resetScoreBtn)
+}
