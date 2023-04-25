@@ -45,8 +45,8 @@ var fighterChoiceHeader = document.querySelector('#fighter-choice-header');
 
 // // These 👇 will be used to interpolate game results as well as change the number of wins:
 
-var userWins = document.querySelector('#user-wins');
-var computerWins = document.querySelector('#computer-wins')
+var userWins = document.querySelector('#num-user-wins');
+var computerWins = document.querySelector('#num-computer-wins')
 
 var changeGameBtn = document.querySelector('#change-game-btn');
 
@@ -59,20 +59,55 @@ var difficultGameBtn = document.querySelector('#difficult-game-btn'); // do i ne
 // // CLASSIC GAME VIEW
 
 var classicGameView = document.querySelector('.classic-fighters-view')
-var birdFighter = document.querySelector('#bird-btn');
-var waterFighter = document.querySelector('#water-btn');
-var stoneFighter = document.querySelector('#stone-btn');
+var birdFighter = document.querySelector('#bird');
+var waterFighter = document.querySelector('#water');
+var stoneFighter = document.querySelector('#stone');
 
 // // DIFFICULT GAME VIEW
 
 var difficultGameView = document.querySelector('.difficult-game-view');
-var earthFighter = document.querySelector('#earth-btn');
-var waterFighter2 = document.querySelector('#water-btn2')
-var fireFighter = document.querySelector('#fire-btn');
-var airFighter = document.querySelector('#air-btn');
+var earthFighter = document.querySelector('#earth');
+var waterFighter2 = document.querySelector('#water2')
+var fireFighter = document.querySelector('#fire');
+var airFighter = document.querySelector('#air');
 
+//// EVENT LISTENERS /////
+
+// Need to refactor to show event delegation with event.target but works for now 👇👇👇 maybe use event.target.parentElement === ???
+
+difficultGameBtn.addEventListener('click', function(event){
+  showGame(event)
+  updateGameType(event)
+  show(difficultGameView)
+
+})
+
+classicGameBtn.addEventListener('click', function(event){
+  showGame(event)
+  updateGameType(event)
+  show(classicGameView)
+})
+
+changeGameBtn.addEventListener('click', function(){ 
+  show(gameButtons)
+  show(gameChoicePrompt)
+  hide(difficultGameView) 
+  hide(classicGameView)
+  hide(fighterChoiceHeader)
+  hide(changeGameBtn)
+})
+
+birdFighter.addEventListener('click', assignClassicUserChoice)
+waterFighter.addEventListener('click', assignClassicUserChoice)
+stoneFighter.addEventListener('click', assignClassicUserChoice)
+
+earthFighter.addEventListener('click', assignDifficultUserChoice)
+waterFighter2.addEventListener('click', assignDifficultUserChoice)
+fireFighter.addEventListener('click', assignDifficultUserChoice)
+airFighter.addEventListener('click', assignDifficultUserChoice)
 
 // Game Functions
+
 
 function createPlayer(name, token, wins=0){
   var player = {
@@ -85,32 +120,34 @@ function createPlayer(name, token, wins=0){
 }
 
 function createGame(){
-  computerPlayer = createPlayer("computer", " 💻 ");
-  userPlayer = createPlayer("human", " 👩‍🦱 ");
+  computerPlayer = createPlayer("computer", " 💻 ", computerWins.innerText);
+  userPlayer = createPlayer("human", " 👩‍🦱 ", userWins.innerText);
   game = {
     players: [userPlayer, computerPlayer],
     score: `user: ${userPlayer.wins}, computer: ${computerPlayer.wins}`,
   }
   players = game.players
-  // takeTurn();
   return game
 }
 
-function takeTurn() {
-  determineComputerChoice();
-  determineUserChoice();
-  detectDraw();
+function assignClassicUserChoice(event) {
+  console.log(event.target.id)
+  for (var i=0; i<classicGameChoices.length; i++){
+    if (event.target.id === classicGameChoices[i].name) {
+      userPlayer.fighter = classicGameChoices[i];
+    }
+  } determineComputerChoice();
 }
 
-function determineUserChoice(){
-  if (game.gameType === 'classic'){ 
-    var i = Math.floor(Math.random() * classicGameChoices.length)
-    userPlayer.fighter = classicGameChoices[i]
-  } else {
-    var i = Math.floor(Math.random() * difficultGameChoices.length);
-    userPlayer.fighter = difficultGameChoices[i]
-  }
+function assignDifficultUserChoice(event) {
+  console.log(event.target.id)
+  for (var i=0; i<difficultGameChoices.length; i++) {
+    if (event.target.id === difficultGameChoices[i].name) {
+      userPlayer.fighter = difficultGameChoices[i]
+    }
+  } determineComputerChoice();
 }
+
 
 function determineComputerChoice(){
   if (game.gameType === 'classic'){ 
@@ -120,13 +157,13 @@ function determineComputerChoice(){
     var i = Math.floor(Math.random() * difficultGameChoices.length);
     computerPlayer.fighter = difficultGameChoices[i]
   }
+  detectDraw()
 }
 
 function detectDraw(){
   if (computerPlayer.fighter === userPlayer.fighter){
     fighterChoiceHeader.innerText = "It's a draw!"
     timeout()
-    takeTurn() // I don't think I will need this here
   } else {
     determineWinner();
   }
@@ -139,18 +176,15 @@ function determineWinner(){
   } else {
     winner = computerPlayer
   } 
-  console.log(winner)
   updateWins(winner)
 }
 
-  // how can i get the wins to persist when I move back to the home page? What function is resetting it in my logic-- the createGame? when/where is this called? -- how can I change it?
-
 function updateWins(winner){
-  winner.wins = winner.wins + 1
+  winner.wins++
   if (winner === userPlayer){
-    userWins.innerText = `Wins: ${userPlayer.wins}`
+    userWins.innerText = `${userPlayer.wins}`
   } else {
-    computerWins.innerText = `Wins: ${computerPlayer.wins}`
+    computerWins.innerText = `${computerPlayer.wins}`
   }
 }
 
@@ -160,50 +194,9 @@ function timeout(){
   }, 2000)
 }
 
-function showFighterChoices(){
-  
+function showBattle(){
+
 }
-
-// Need to refactor to show event delegation with event.target but works for now 👇👇👇 maybe use event.target.parentElement === ???
-
-difficultGameBtn.addEventListener('click', function(event){
-  showGame(event)
-  updateGameType(event)
-  show(difficultGameView)
-  takeTurn();
-})
-
-classicGameBtn.addEventListener('click', function(event){
-  showGame(event)
-  updateGameType(event)
-  show(classicGameView)
-  takeTurn();
-})
-
-changeGameBtn.addEventListener('click', function(){ 
-  show(gameButtons)
-  show(gameChoicePrompt)
-  hide(difficultGameView) 
-  hide(classicGameView)
-  hide(fighterChoiceHeader)
-  hide(changeGameBtn)
-})
-
-
-
-// gameButtons.addEventListener('click', function(event){
-//   showGame(event)
-//   updateGameType(event)
-// })
-
-function show(element) {
-  element.classList.remove('hidden');
-}
-
-function hide(element) {
-  element.classList.add('hidden')
-}
-
 
 function showGame(){
   hide(gameButtons)
@@ -213,6 +206,13 @@ function showGame(){
   createGame()
 }
 
+function show(element) {
+  element.classList.remove('hidden');
+}
+
+function hide(element) {
+  element.classList.add('hidden')
+}
 
 function updateGameType(event){
   if (event.currentTarget === classicGameBtn) {
@@ -223,6 +223,9 @@ function updateGameType(event){
   return game
 }
   
+
+
+
   // why is my event.target not working?
 
 // function beginNewGame(event){
@@ -233,11 +236,18 @@ function updateGameType(event){
 
 // function beginNewGame(); 
 //displayGameResult(){};
-// function handlePlayersChoice(){};
 
 
 // TO REFACTOR: go thgouh & see if I can pass any of the variables as parameters
 
+// add reset game button & function
+  // reset wins to zero
+  // only display if score is > 0
+      // if (userPlayer.wins || computerPlayer.wins > 0)
+        // show(resetGameButton)
+  // ok to have on main page as well
 
+  // make userChoice buttons function
 
-
+  // display the computerChoice image & the userChioce image
+  // resetBoard? with timeout after each roundb
