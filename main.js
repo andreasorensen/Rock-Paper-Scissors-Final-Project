@@ -129,7 +129,6 @@ function createGame(){
 }
 
 function assignClassicUserChoice(event) {
-  console.log(event.target.id)
   for (var i=0; i<classicGameChoices.length; i++){
     if (event.target.id === classicGameChoices[i].name) {
       userPlayer.fighter = classicGameChoices[i];
@@ -138,7 +137,6 @@ function assignClassicUserChoice(event) {
 }
 
 function assignDifficultUserChoice(event) {
-  console.log(event.target.id)
   for (var i=0; i<difficultGameChoices.length; i++) {
     if (event.target.id === difficultGameChoices[i].name) {
       userPlayer.fighter = difficultGameChoices[i]
@@ -203,7 +201,6 @@ function timeout(){
 }
 
 function resetBoard(){
-  console.log(difficultGameView)
   if (game.gameType === 'classic'){
     show(classicGameView)
   } 

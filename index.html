@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="styles.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik+Pixels&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Pixels&display=swap" rel="stylesheet">
+    <title>Rock-Paper-Scissors</title>
+  </head>
 
-  <title>Rock-Paper-Scissors</title>
-</head>
+  <body>
+    <section class="header-and-description">
+      <h1>ROSHAMBO</h1>
+      <h2 class="header" id="game-choice-header">Choose your game!</h2>
+      <h2 class="header hidden" id="fighter-choice-header">Choose your fighter!</h2>
+    </section>
 
-<body>
-  <section class="header-and-description">
-    <h1>ROSHAMBO</h1>
-    <h2 class="header" id="game-choice-header">Choose your game!</h2>
-    <h2 class="header hidden" id="fighter-choice-header">Choose your fighter!</h2>
-  </section>
-
-    <section class="score-columns">
-      <section id="user-score-column"> <!--persists across all views-->
+    <main class="score-columns">
+        <!-- figure out how to not have the main nested with in this & change the CSS! -->
+      <section class="score-columns" id="user-score-column"> <!--persists across all views-->
         <figure class="token" id="user-emoji" alt="person-emoji">👩‍🦱
           <figcaption>Human</figcaption>
-        <p class="wins" id="user-wins">Wins:</p>
-        <p class="wins" id="num-user-wins">0</p>
-        <button type="submit" id="change-game-btn" class="hidden">Change Game?</button>
+          <p class="wins" id="user-wins">Wins:</p>
+          <p class="wins" id="num-user-wins">0</p>
+          <button type="submit" id="change-game-btn" class="hidden">Change Game?</button>
         </figure>
       </section>
 
-      <main class="main-game-section">
+      <section class="main-game-section">
         <div class="game-buttons"><!--choose your game view-->
           <button type="submit" class="classic-btn button" id="classic-btn">
             <section class='classic-btn'>
@@ -68,20 +68,18 @@
         <section class="fighter-display">
           <!-- userPlayer.fighter.image && computerPlayer.fighter.image will be displayed here -->
         </section>
+      </section>    
 
-      </main>    
-
-      <section id="computer-score-column"> <!--persists across all views-->
+      <section class= "score-columns" id="computer-score-column"> <!--persists across all views-->
         <figure class="token" id= "computer-emoji" alt="computer-emoji">💻
           <figcaption>Computer</figcaption>
-        <p class="wins">Wins:</p>
-        <p class="wins" id="num-computer-wins">0</p>
-        <button type="submit" id="reset-score-btn" class="hidden">Reset Score</button>
+          <p class="wins">Wins:</p>
+          <p class="wins" id="num-computer-wins">0</p>
+          <button type="submit" id="reset-score-btn" class="hidden">Reset Score</button>
         </figure>
       </section>
-    </section>
-    <!---Get rid of the above section, which connects to line 20 & just give them both the same class, move indentation-->
+    </main>
 
-  <script src="main.js"></script>
-</body>
+    <script src="main.js"></script>
+  </body>
 </html>
