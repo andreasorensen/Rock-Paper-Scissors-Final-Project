@@ -38,6 +38,7 @@ h2 {
   background-color: light orange;
 }
 
+
 #user-score-column {
   margin-right: auto;
 }
@@ -46,9 +47,13 @@ h2 {
   margin-left: auto;
 }
 
+/* .token {
+  font-size: 30px;
+} */
+
 .wins {
   margin-top: 30px;
-  font-size: smaller;
+  /* font-size: 20px; */
 }
 
 #computer-emoji, #user-emoji {
@@ -111,11 +116,15 @@ h3 {
   box-shadow: 5px 5px purple;
 }
 
+.fighter-display {
+  padding-top: 200px;
+}
+
 .fighter {
   height: 200px;
 }
 
-#water-btn, #bird-btn, .difficult-game-view {
+#water, #bird, .difficult-game-view {
   padding-top: 200px;
 }
 
