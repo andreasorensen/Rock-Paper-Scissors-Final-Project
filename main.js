@@ -159,17 +159,9 @@ function showBattle(winner){
   hide(classicGameView)
   hide(difficultGameView)
   fighterDisplay.innerHTML = `${userPlayer.fighter.image} ${computerPlayer.fighter.image}`
-  // if (winner = userPlayer){
-  //   fighterDisplay.innerText = 'You win!'
   timeout();
 }
 
-// change the innerText of fighterHeader to: either: 'You Won!' || 'Computer Won!'  w/timeout ????
-  // also need to invoke timeout() so that game board resets
-//hide(fighterHeader ??)
-//hide(difficultGameView) 
-//hide(classicGameView)
-// change innerHTML of results-display to have img of both userPlayer.fighter.image & computerPlayer.fighter.image
 
 // function resetBoard()
 // this function will reset the gameBoard after each round
@@ -211,8 +203,18 @@ function updateWins(winner){
 
 function timeout(){
   setTimeout(() => {
-    fighterChoiceHeader.innerText = "Choose your fighter!", fighterDisplay.innerHTML = ""
+    fighterChoiceHeader.innerText = "Choose your fighter!", fighterDisplay.innerHTML = "", resetBoard()
   }, 2000)
+}
+
+function resetBoard(){
+  console.log(difficultGameView)
+  if (game.gameType === 'classic'){
+    show(classicGameView)
+  } 
+  else if (game.gameType === 'difficult'){
+    show(difficultGameView)
+  }
 }
 
 function showGame(){
@@ -254,7 +256,6 @@ function updateGameType(event){
         // show(resetGameButton)
   // ok to have on main page as well
 
-  // make userChoice buttons function
 
   // display the computerChoice image & the userChioce image
   // resetBoard? with timeout after each roundb
