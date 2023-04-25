@@ -1,5 +1,4 @@
 var classicGameChoices = [
-
   {name: 'stone', 
   image: '<img class="fighter" type="image" id="stone-btn" src="assests/rock.png" alt="stone-button">', 
   defeats: 'bird'}, 
@@ -14,7 +13,6 @@ var classicGameChoices = [
 ];
 
 var difficultGameChoices = [
-  
   {name: 'earth',
   image: '<img class="fighter" type="image" id="earth-btn" src="assests/earth.png" alt="earth-button">',
   defeats: 'air'},
@@ -27,7 +25,7 @@ var difficultGameChoices = [
   image: '<img class="fighter" type="image" id="fire-btn" src="assests/fire.png" alt="fire-button">',
   defeats: 'earth'},
 
-  {name: 'water',
+  {name: 'water2',
   image: '<img class="fighter" type="image" id="water-btn2" src="assests/water.png" alt="water-button">',
   defeats: 'fire'}
 ];
@@ -42,12 +40,8 @@ var game;
 
 var gameChoicePrompt = document.querySelector('#game-choice-header');
 var fighterChoiceHeader = document.querySelector('#fighter-choice-header');
-
-// // These 👇 will be used to interpolate game results as well as change the number of wins:
-
 var userWins = document.querySelector('#num-user-wins');
 var computerWins = document.querySelector('#num-computer-wins')
-
 var changeGameBtn = document.querySelector('#change-game-btn');
 
 // // HOME VIEW
@@ -55,6 +49,9 @@ var changeGameBtn = document.querySelector('#change-game-btn');
 var gameButtons = document.querySelector('.game-buttons')
 var classicGameBtn = document.querySelector('.classic-btn');
 var difficultGameBtn = document.querySelector('#difficult-game-btn'); // do i need this if event handler is on gameButtons section?
+var fighterDisplay = document.querySelector('.fighter-display');
+
+/// REFACTOR THE BELOW TO DRY!! 👇👇👇 ////
 
 // // CLASSIC GAME VIEW
 
@@ -79,7 +76,6 @@ difficultGameBtn.addEventListener('click', function(event){
   showGame(event)
   updateGameType(event)
   show(difficultGameView)
-
 })
 
 classicGameBtn.addEventListener('click', function(event){
@@ -97,6 +93,8 @@ changeGameBtn.addEventListener('click', function(){
   hide(changeGameBtn)
 })
 
+/// REFACTOR THE BELOW TO DRY!! 👇👇👇 ////
+
 birdFighter.addEventListener('click', assignClassicUserChoice)
 waterFighter.addEventListener('click', assignClassicUserChoice)
 stoneFighter.addEventListener('click', assignClassicUserChoice)
@@ -108,13 +106,11 @@ airFighter.addEventListener('click', assignDifficultUserChoice)
 
 // Game Functions
 
-
 function createPlayer(name, token, wins=0){
   var player = {
     name: name, 
     token: token,
     wins
-    // add fighter here?? replace in the function that the choice is chosen in? 
   }
   return player
 }
@@ -124,7 +120,7 @@ function createGame(){
   userPlayer = createPlayer("human", " 👩‍🦱 ", userWins.innerText);
   game = {
     players: [userPlayer, computerPlayer],
-    score: `user: ${userPlayer.wins}, computer: ${computerPlayer.wins}`,
+    score: `user: ${userPlayer.wins}, computer: ${computerPlayer.wins}`, // I think this can be taken out.
   }
   players = game.players
   return game
@@ -148,7 +144,6 @@ function assignDifficultUserChoice(event) {
   } determineComputerChoice();
 }
 
-
 function determineComputerChoice(){
   if (game.gameType === 'classic'){ 
     var i = Math.floor(Math.random() * classicGameChoices.length)
@@ -160,10 +155,33 @@ function determineComputerChoice(){
   detectDraw()
 }
 
+function showBattle(winner){
+  hide(classicGameView)
+  hide(difficultGameView)
+  fighterDisplay.innerHTML = `${userPlayer.fighter.image} ${computerPlayer.fighter.image}`
+  // if (winner = userPlayer){
+  //   fighterDisplay.innerText = 'You win!'
+  timeout();
+}
+
+// change the innerText of fighterHeader to: either: 'You Won!' || 'Computer Won!'  w/timeout ????
+  // also need to invoke timeout() so that game board resets
+//hide(fighterHeader ??)
+//hide(difficultGameView) 
+//hide(classicGameView)
+// change innerHTML of results-display to have img of both userPlayer.fighter.image & computerPlayer.fighter.image
+
+// function resetBoard()
+// this function will reset the gameBoard after each round
+
+// function beginNewGame()
+//this function will have an event listener on the begin new game button
+
+
 function detectDraw(){
   if (computerPlayer.fighter === userPlayer.fighter){
     fighterChoiceHeader.innerText = "It's a draw!"
-    timeout()
+    showBattle() 
   } else {
     determineWinner();
   }
@@ -173,9 +191,12 @@ function determineWinner(){
   var winner;
   if (userPlayer.fighter.defeats === computerPlayer.fighter.name){
     winner = userPlayer
+    fighterChoiceHeader.innerText = "Human Wins!"
   } else {
     winner = computerPlayer
+    fighterChoiceHeader.innerText = "Computer Wins!"
   } 
+  showBattle()
   updateWins(winner)
 }
 
@@ -190,12 +211,8 @@ function updateWins(winner){
 
 function timeout(){
   setTimeout(() => {
-    fighterChoiceHeader.innerText = "Choose your fighter!"
+    fighterChoiceHeader.innerText = "Choose your fighter!", fighterDisplay.innerHTML = ""
   }, 2000)
-}
-
-function showBattle(){
-
 }
 
 function showGame(){
@@ -227,16 +244,6 @@ function updateGameType(event){
 
 
   // why is my event.target not working?
-
-// function beginNewGame(event){
-
-// add another button to reset game scores 
-  
-//   } // also need timeout() included here.
-
-// function beginNewGame(); 
-//displayGameResult(){};
-
 
 // TO REFACTOR: go thgouh & see if I can pass any of the variables as parameters
 

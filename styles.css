@@ -116,6 +116,10 @@ h3 {
   box-shadow: 5px 5px purple;
 }
 
+.fighter-display {
+  padding-top: 200px;
+}
+
 .fighter {
   height: 200px;
 }
