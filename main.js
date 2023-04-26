@@ -30,43 +30,38 @@ var difficultGameChoices = [
   defeats: 'fire'}
 ];
 
-// // data model variables:
+    ///////////// data model variables/////////////
+
 var players = [];
 var game;
 
- // //Query Selector Variables: 
+      ////////  QUERY SELECTORS ////////////
 var gameChoicePrompt = document.querySelector('#game-choice-header');
 var fighterChoiceHeader = document.querySelector('#fighter-choice-header');
 var userWins = document.querySelector('#num-user-wins');
-var computerWins = document.querySelector('#num-computer-wins')
+var computerWins = document.querySelector('#num-computer-wins');
 
-/////// buttons ////////
+             /////// buttons ////////
 var changeGameBtn = document.querySelector('#change-game-btn');
-var resetScoreBtn = document.querySelector('#reset-score-btn')
+var resetScoreBtn = document.querySelector('#reset-score-btn');
 var gameButtons = document.querySelector('.game-buttons')
 var classicGameBtn = document.querySelector('#classic-game-btn');
-var difficultGameBtn = document.querySelector('#difficult-game-btn'); // do i need this if event handler is on gameButtons section?
+var difficultGameBtn = document.querySelector('#difficult-game-btn');
 
-/////// views /////////
+              /////// views /////////
 var fighterDisplay = document.querySelector('.fighter-display');
 var classicGameView = document.querySelector('.classic')
 var difficultGameView = document.querySelector('.difficult');
 var gameView = document.querySelector('.game-view')
 
-//// EVENT LISTENERS /////
-resetScoreBtn.addEventListener('click', resetPlayerWins)
+          //////// EVENT LISTENERS ////////
+resetScoreBtn.addEventListener('click', resetPlayerWins);
 
 difficultGameBtn.addEventListener('click', function(event) {
   showGame(event)
   updateGameType(event)
   show(difficultGameView)
-})
-
-classicGameBtn.addEventListener('click', function(event) {
-  showGame()
-  updateGameType(event)
-  show(classicGameView)
-})
+});
 
 changeGameBtn.addEventListener('click', function() { 
   show(gameButtons)
@@ -75,17 +70,19 @@ changeGameBtn.addEventListener('click', function() {
   hide(classicGameView)
   hide(fighterChoiceHeader)
   hide(changeGameBtn)
-})
+});
 
 gameView.addEventListener('click', function(event) {
-  if (event.target.parentElement.classList.contains('classic')) {
-    assignClassicUserChoice(event)
-  } else {
-    assignDifficultUserChoice(event)
-  }
-})
+  takeTurn(event)
+});
 
-////// Game Functions ///////
+classicGameBtn.addEventListener('click', function(event) {
+  showGame()
+  updateGameType(event)
+  show(classicGameView)
+});
+
+          /////////// FUNCTIONS ////////////
 
 function createPlayer(name, token, wins=0) {
   var player = {
@@ -108,14 +105,22 @@ function createGame() {
   return game
 }
 
+function takeTurn(event) {
+  if (event.target.parentElement.classList.contains('classic')) {
+    assignClassicUserChoice(event)
+  } else {
+    assignDifficultUserChoice(event)
+  }
+
+  determineComputerChoice()
+};
+
 function assignClassicUserChoice(event) {
   for (var i=0; i<classicGameChoices.length; i++) {
     if (event.target.id === classicGameChoices[i].name) {
       players[0].fighter = classicGameChoices[i];
     }
-  };
-
-  determineComputerChoice();
+  }
 }
 
 function assignDifficultUserChoice(event) {
@@ -124,8 +129,6 @@ function assignDifficultUserChoice(event) {
       players[0].fighter = difficultGameChoices[i]
     }
   } 
-
-  determineComputerChoice();
 }
 
 function determineComputerChoice() {
@@ -149,24 +152,24 @@ function showGame() {
 }
 
 function showBattle() {
-  if (game.gameType === 'classic') {
-    hide(classicGameView)
-  } else {
-    hide(difficultGameView)
-  }
-
+  hide(gameView)
   fighterDisplay.innerHTML = `${players[0].fighter.image} ${players[1].fighter.image}`
   timeout();
 }
 
 function detectDraw() {
   if (players[1].fighter === players[0].fighter) {
-    fighterChoiceHeader.innerText = "It's a draw!"
+    announceDraw()
     showBattle() 
   } else {
     determineWinner();
   }
+
   hide(changeGameBtn)
+}
+
+function announceDraw() {
+  fighterChoiceHeader.innerText = "It's a draw!"
 }
 
 function determineWinner() {
@@ -208,13 +211,7 @@ function timeout() {
 }
 
 function resetBoard() {
-  if (game.gameType === 'classic') {
-    show(classicGameView)
-  } 
-  else if (game.gameType === 'difficult') {
-    show(difficultGameView)
-  }
-
+  show(gameView)
   show(changeGameBtn)
 }
 

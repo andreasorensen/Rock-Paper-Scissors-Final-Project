@@ -3,8 +3,6 @@
 }
 
 html {
-	background-size: 200%;
-	height: 100vh;
   background-color: #e73c7e;
 }
 
@@ -12,7 +10,6 @@ html {
 
 .header {
   text-align: center;
-  width: 500px;
   position: absolute;
   margin-left: auto;
   margin-right: auto;
@@ -22,7 +19,6 @@ html {
 
 h1 {
   font-size: 50px;
-  margin-bottom: -10px;
 }
 
 h2 {
@@ -60,7 +56,6 @@ h2 {
 
 .button {
   display: flex;
-  margin: auto;
   width: 210px;
   padding-bottom: 5px;
   font-size: 15px;
@@ -92,16 +87,22 @@ h3 {
   background-color: #e73c7e ;
   cursor: grab;
   box-shadow: 5px 5px purple;
+  font-size: 15px;
+  width: 145px;
 }
+
+/* fighters */
 
 .fighter {
   height: 200px;
   cursor: grab;
 }
 
-#water, #bird, .difficult, .fighter-display {
+.classic, .difficult, .fighter-display {
   padding-top: 200px;
 }
+
+/* misc */
 
 .hidden {
   display: none;
