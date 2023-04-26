@@ -50,7 +50,7 @@ var computerWins = document.querySelector('#num-computer-wins')
 var changeGameBtn = document.querySelector('#change-game-btn');
 var gameButtons = document.querySelector('.game-buttons')
 
-var classicGameBtn = document.querySelector('.classic-btn');
+var classicGameBtn = document.querySelector('#classic-game-btn');
 var difficultGameBtn = document.querySelector('#difficult-game-btn'); // do i need this if event handler is on gameButtons section?
 
 

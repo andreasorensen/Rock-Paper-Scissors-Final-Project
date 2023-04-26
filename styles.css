@@ -36,7 +36,6 @@ h2 {
   text-align: center;
 }
 
-
 #user-score-column {
   margin-right: auto;
 }
@@ -74,11 +73,11 @@ h2 {
   background-color: blueviolet;
 }
 
-#classic-btn {
+.classic-btn {
   margin-top: 200px;
 }
 
-#difficult-btn {
+.difficult-btn {
   margin-top: 50px;
   height: 235px;
 }
