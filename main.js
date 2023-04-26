@@ -174,6 +174,7 @@ function detectDraw(){
   } else {
     determineWinner();
   }
+  hide(changeGameBtn)
 }
 
 function determineWinner(){
@@ -199,8 +200,6 @@ function updateWins(winner){
   showResetScoreBtn()
 }
 
-
-
 function timeout(){
   setTimeout(() => {
     fighterChoiceHeader.innerText = "Choose your fighter!", fighterDisplay.innerHTML = "", resetBoard()
@@ -214,6 +213,7 @@ function resetBoard(){
   else if (game.gameType === 'difficult'){
     show(difficultGameView)
   }
+  show(changeGameBtn)
 }
 
 function showGame(){

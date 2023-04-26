@@ -58,7 +58,6 @@ h2 {
   background-color: lightpink;
 }
 
-
 /* buttons */
 
 .button {
@@ -97,16 +96,12 @@ h3 {
   box-shadow: 5px 5px purple;
 }
 
-.fighter-display {
-  padding-top: 200px;
-}
-
 .fighter {
   height: 200px;
   cursor: grab;
 }
 
-#water, #bird, .difficult-game-view {
+#water, #bird, .difficult-game-view, .fighter-display {
   padding-top: 200px;
 }
 
