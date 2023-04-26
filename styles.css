@@ -99,7 +99,7 @@ h3 {
   cursor: grab;
 }
 
-#water, #bird, .difficult-game-view, .fighter-display {
+#water, #bird, .difficult, .fighter-display {
   padding-top: 200px;
 }
 
