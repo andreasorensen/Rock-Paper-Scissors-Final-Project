@@ -19,6 +19,7 @@ CODE STYLE:
   I used Turing's recommended styling guide for HTML, CSS & JavaScript. It is standard.
 
 GIF:
+![ezgif com-video-to-gif (3)](https://user-images.githubusercontent.com/125161431/234710196-6c397a7f-e1b9-4bb2-b6bd-3505de5e04ef.gif)
 
 
 TECH/FRAMEWORK USED: 
