@@ -32,18 +32,11 @@ var difficultGameChoices = [
 
 // // data model variables:
 var players = [];
-var computerPlayer;
-var userPlayer;
 var game;
 
  // //Query Selector Variables: 
 var gameChoicePrompt = document.querySelector('#game-choice-header');
 var fighterChoiceHeader = document.querySelector('#fighter-choice-header');
-
-// keep fighterChoiceHeader - change name to gamePrompt
-// change innerText of newGamePrompt anytime gameChoicePrompt is being shown/hidden
-// replace fighterChoiceHeader with gameChoicePrompt
-
 var userWins = document.querySelector('#num-user-wins');
 var computerWins = document.querySelector('#num-computer-wins')
 
@@ -60,9 +53,7 @@ var classicGameView = document.querySelector('.classic')
 var difficultGameView = document.querySelector('.difficult');
 var gameView = document.querySelector('.game-view')
 
-
 //// EVENT LISTENERS /////
-
 resetScoreBtn.addEventListener('click', resetPlayerWins)
 
 difficultGameBtn.addEventListener('click', function(event) {
@@ -72,21 +63,10 @@ difficultGameBtn.addEventListener('click', function(event) {
 })
 
 classicGameBtn.addEventListener('click', function(event) {
-  showGame(event)
+  showGame()
   updateGameType(event)
   show(classicGameView)
 })
-
-// gameButtons.addEventListener('click', function(event) {
-//   showGame(event)
-//   updateGameType(event)
-//   if (event.target.closest('button').className.includes('classic')) {
-//     show(classicGameView)
-//   } else {
-//     show(difficultGameView)
-//   }
-// })
-
 
 changeGameBtn.addEventListener('click', function() { 
   show(gameButtons)
@@ -118,8 +98,8 @@ function createPlayer(name, token, wins=0) {
 }
 
 function createGame() {
-  computerPlayer = createPlayer("Computer", " 💻 ", computerWins.innerText);
-  userPlayer = createPlayer("Human", " 👩‍🦱 ", userWins.innerText);
+  var computerPlayer = createPlayer("Computer", " 💻 ", computerWins.innerText);
+  var userPlayer = createPlayer("Human", " 👩‍🦱 ", userWins.innerText);
   game = {
     players: [userPlayer, computerPlayer],
   };
@@ -131,7 +111,7 @@ function createGame() {
 function assignClassicUserChoice(event) {
   for (var i=0; i<classicGameChoices.length; i++) {
     if (event.target.id === classicGameChoices[i].name) {
-      userPlayer.fighter = classicGameChoices[i];
+      players[0].fighter = classicGameChoices[i];
     }
   };
 
@@ -141,20 +121,31 @@ function assignClassicUserChoice(event) {
 function assignDifficultUserChoice(event) {
   for (var i=0; i<difficultGameChoices.length; i++) {
     if (event.target.id === difficultGameChoices[i].name) {
-      userPlayer.fighter = difficultGameChoices[i]
+      players[0].fighter = difficultGameChoices[i]
     }
-  } determineComputerChoice();
+  } 
+
+  determineComputerChoice();
 }
 
 function determineComputerChoice() {
   if (game.gameType === 'classic') { 
     var i = Math.floor(Math.random() * classicGameChoices.length)
-    computerPlayer.fighter = classicGameChoices[i]
+    players[1].fighter = classicGameChoices[i]
   } else {
     var i = Math.floor(Math.random() * difficultGameChoices.length);
-    computerPlayer.fighter = difficultGameChoices[i]
+    players[1].fighter = difficultGameChoices[i]
   }
+
   detectDraw()
+}
+
+function showGame() {
+  hide(gameButtons)
+  hide(gameChoicePrompt)
+  show(fighterChoiceHeader)
+  show(changeGameBtn)
+  createGame()
 }
 
 function showBattle() {
@@ -163,12 +154,13 @@ function showBattle() {
   } else {
     hide(difficultGameView)
   }
-  fighterDisplay.innerHTML = `${userPlayer.fighter.image} ${computerPlayer.fighter.image}`
+
+  fighterDisplay.innerHTML = `${players[0].fighter.image} ${players[1].fighter.image}`
   timeout();
 }
 
 function detectDraw() {
-  if (computerPlayer.fighter === userPlayer.fighter) {
+  if (players[1].fighter === players[0].fighter) {
     fighterChoiceHeader.innerText = "It's a draw!"
     showBattle() 
   } else {
@@ -179,10 +171,10 @@ function detectDraw() {
 
 function determineWinner() {
   var winner;
-  if (userPlayer.fighter.defeats === computerPlayer.fighter.name) {
-    winner = userPlayer
+  if (players[0].fighter.defeats === players[1].fighter.name) {
+    winner = players[0]
   } else {
-    winner = computerPlayer
+    winner = players[1]
   } 
 
   announceWinner(winner)
@@ -200,10 +192,10 @@ function updateWins(winner) {
 }
 
 function updateScoreBoard(winner) {
-  if (winner === userPlayer) {
-    userWins.innerText = `${userPlayer.wins}`
+  if (winner === players[0]) {
+    userWins.innerText = `${players[0].wins}`
   } else {
-    computerWins.innerText = `${computerPlayer.wins}`
+    computerWins.innerText = `${players[1].wins}`
   }
 
   showResetScoreBtn()
@@ -226,14 +218,6 @@ function resetBoard() {
   show(changeGameBtn)
 }
 
-function showGame() {
-  hide(gameButtons)
-  hide(gameChoicePrompt) /// can get rid of this HTML change ... instead have anohter function to update Banner
-  show(fighterChoiceHeader) /// can get rid of this HTML change ...
-  show(changeGameBtn)
-  createGame()
-}
-
 function show(element) {
   element.classList.remove('hidden');
 }
@@ -253,26 +237,20 @@ function updateGameType(event) {
 }
 
 function showResetScoreBtn() {
-  if(userPlayer.wins || computerPlayer.wins) {
+  if(players[0].wins || players[1].wins) {
     show(resetScoreBtn)
   }
 }
 
 function resetPlayerWins() {
-  userPlayer.wins = 0
-  computerPlayer.wins = 0
+  players[0].wins = 0
+  players[1].wins = 0
   resetScoreBoard()
 }
 
 function resetScoreBoard() {
-  userWins.innerText = `${userPlayer.wins}`
-  computerWins.innerText = `${computerPlayer.wins}`
+  userWins.innerText = `${players[0].wins}`
+  computerWins.innerText = `${players[1].wins}`
   hide(resetScoreBtn)
 }
 
-
-// function changeBanner(event) {
-//   if (event.target.classList.contains)
-// }
-
-//if i could pass element as parameter?
