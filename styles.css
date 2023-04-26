@@ -34,7 +34,6 @@ h2 {
 .score-columns {
   display: flex;
   text-align: center;
-  justify-content: center;
 }
 
 
