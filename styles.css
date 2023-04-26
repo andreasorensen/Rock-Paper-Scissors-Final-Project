@@ -35,7 +35,6 @@ h2 {
   display: flex;
   text-align: center;
   justify-content: center;
-  background-color: light orange;
 }
 
 
@@ -47,13 +46,8 @@ h2 {
   margin-left: auto;
 }
 
-/* .token {
-  font-size: 30px;
-} */
-
 .wins {
   margin-top: 30px;
-  /* font-size: 20px; */
 }
 
 .token {
@@ -84,8 +78,6 @@ h2 {
 
 #classic-btn {
   margin-top: 200px;
-  height: 180px;
-  /* height: 220px; */
 }
 
 #difficult-btn {
