@@ -48,12 +48,12 @@ var fighterChoiceHeader = document.querySelector('#fighter-choice-header');
 var userWins = document.querySelector('#num-user-wins');
 var computerWins = document.querySelector('#num-computer-wins')
 var changeGameBtn = document.querySelector('#change-game-btn');
-
-// // HOME VIEW
-
 var gameButtons = document.querySelector('.game-buttons')
+
 var classicGameBtn = document.querySelector('.classic-btn');
 var difficultGameBtn = document.querySelector('#difficult-game-btn'); // do i need this if event handler is on gameButtons section?
+
+
 var fighterDisplay = document.querySelector('.fighter-display');
 var resetScoreBtn = document.querySelector('#reset-score-btn')
 
@@ -62,9 +62,6 @@ var resetScoreBtn = document.querySelector('#reset-score-btn')
 // // CLASSIC GAME VIEW
 
 var classicGameView = document.querySelector('.classic-fighters-view')
-var birdFighter = document.querySelector('#bird');
-var waterFighter = document.querySelector('#water');
-var stoneFighter = document.querySelector('#stone');
 
 // // DIFFICULT GAME VIEW
 
@@ -81,6 +78,7 @@ var airFighter = document.querySelector('#air');
 resetScoreBtn.addEventListener('click', resetPlayerWins)
 
 difficultGameBtn.addEventListener('click', function(event){
+  (console.log(event.target))
   showGame(event)
   updateGameType(event)
   show(difficultGameView)
@@ -101,16 +99,17 @@ changeGameBtn.addEventListener('click', function(){
   hide(changeGameBtn)
 })
 
-/// REFACTOR THE BELOW TO DRY!! 👇👇👇 ////
+classicGameView.addEventListener('click', function(event){
+  if(event.target.classList.contains('fighter')){
+    assignClassicUserChoice(event);
+  }
+})
 
-birdFighter.addEventListener('click', assignClassicUserChoice)
-waterFighter.addEventListener('click', assignClassicUserChoice)
-stoneFighter.addEventListener('click', assignClassicUserChoice)
-
-earthFighter.addEventListener('click', assignDifficultUserChoice)
-waterFighter2.addEventListener('click', assignDifficultUserChoice)
-fireFighter.addEventListener('click', assignDifficultUserChoice)
-airFighter.addEventListener('click', assignDifficultUserChoice)
+difficultGameView.addEventListener('click', function(event){
+  if (event.target.classList.contains('fighter')){
+    assignDifficultUserChoice(event)
+  }
+})
 
 // Game Functions
 
@@ -124,8 +123,8 @@ function createPlayer(name, token, wins=0){
 }
 
 function createGame(){
-  computerPlayer = createPlayer("computer", " 💻 ", computerWins.innerText);
-  userPlayer = createPlayer("human", " 👩‍🦱 ", userWins.innerText);
+  computerPlayer = createPlayer("Computer", " 💻 ", computerWins.innerText);
+  userPlayer = createPlayer("Human", " 👩‍🦱 ", userWins.innerText);
   game = {
     players: [userPlayer, computerPlayer],
   }
@@ -161,8 +160,11 @@ function determineComputerChoice(){
 }
 
 function showBattle(){
-  hide(classicGameView)
-  hide(difficultGameView)
+  if (game.gameType === 'classic') {
+    hide(classicGameView)
+  } else {
+    hide(difficultGameView)
+  }
   fighterDisplay.innerHTML = `${userPlayer.fighter.image} ${computerPlayer.fighter.image}`
   timeout();
 }
@@ -181,17 +183,24 @@ function determineWinner(){
   var winner;
   if (userPlayer.fighter.defeats === computerPlayer.fighter.name){
     winner = userPlayer
-    fighterChoiceHeader.innerText = "Human Wins!"
   } else {
     winner = computerPlayer
-    fighterChoiceHeader.innerText = "Computer Wins!"
   } 
+  announceWinner(winner)
   showBattle()
   updateWins(winner)
 }
 
+function announceWinner(winner){
+  fighterChoiceHeader.innerHTML = `${winner.name} Wins!`
+}
+
 function updateWins(winner){
   winner.wins++
+  updateScoreBoard(winner)
+}
+
+function updateScoreBoard(winner){
   if (winner === userPlayer){
     userWins.innerText = `${userPlayer.wins}`
   } else {
@@ -259,10 +268,9 @@ function resetScoreBoard(){
   hide(resetScoreBtn)
 }
 
+
 // function changeBanner(event){
-  // if (event.target.id === gamebuttons/or two variables to hit both){
-  //   promptHeader.innerHTML = "Choose your fighter!"
-  // } else if (winner)
+//   if (event.target.classList.contains)
 // }
 
 //if i could pass element as parameter?
